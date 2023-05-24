@@ -1,0 +1,28 @@
+<h1><%= @item.title %></h1>
+<p><%= @item.body %></p>
+<hr>
+<%= link_to "Редагувати", edit_item_path(@item), :class => "btn btn-warning" %>
+<%= button_to 'Видалити', @item, method: :delete, form: 
+  { data: { turbo: true, turbo_confirm: 'Are you sure?' } }, :class => "btn btn-danger" %>
+<hr>
+<h2>Усі коментарі</h2>
+<% @item.comments.each do |comment| %>
+  <div class="alert alert-light">
+    <h3><strong><%= comment.username %></strong>: <%= comment.body %></h3>
+  </div>
+<% end %>
+<hr>
+<h2>Новий коментар</h2>
+<%= form_for ([@item,  @item.comments.build]) do |f| %>
+  <p>
+    Користувач<br>
+    <%= f.text_field :username, {class: 'form-control'}%>
+  </p>
+  <p>
+    Коментар<br>
+    <%= f.text_area :body, {class: 'form-control'}%>
+  </p>
+  <p>
+    <%= f.submit("Додати коментар", {class: 'btn btn-success'}) %>
+  </p>
+<% end %>

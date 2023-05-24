@@ -1,0 +1,8 @@
+<h1>Усі наші товари</h1>
+<% @items.each do |item| %>
+  <div class="alert alert-light">
+    <h3><%= item.title %></h3>
+    <p><%= item.body %></p>
+    <%= link_to "Читати", item_path(item), :class => 'btn btn-warning' %>
+  </div>
+<% end %>
